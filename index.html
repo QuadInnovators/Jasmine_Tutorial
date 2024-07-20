@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jasmine Testing</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div class="main" style="background-image: url('bgimage.png');width:100%;">
+    <!-- ///ADDITION FUNCTION FUNCTION////////-->
+    <div class="outer-container" >
+       
+    <p>Test Cases For Different Functions</p>
+  <div class="container" >
+    <h1> (1) Simple Addition Function</h1>
+    <div class="input-group">
+      <label for="num1">Number 1:</label>
+      <input type="number" id="num1">
+    </div>
+    <div class="input-group">
+      <label for="num2">Number 2:</label>
+      <input type="number" id="num2">
+    </div>
+    <button id="addBtn">Add</button>
+    <h2 style="font-size: 18px;font-family: Arial, Helvetica, sans-serif;">Result: <span id="result"></span></h2>
+  </div>
+  <script>
+    class Calculator {
+        add(a, b) {
+            return a + b;
+        }
+    }
+
+    document.getElementById('addBtn').addEventListener('click', () => {
+        const num1 = parseFloat(document.getElementById('num1').value);
+        const num2 = parseFloat(document.getElementById('num2').value);
+        
+        if (isNaN(num1) || isNaN(num2)) {
+            document.getElementById('result').textContent = 'Please enter valid numbers';
+            return;
+        }
+
+        const calculator = new Calculator();
+        const result = calculator.add(num1, num2);
+        document.getElementById('result').textContent = result;
+    });
+</script>
+
+
+
+<!-- ////////////////////EXPONENTIAL FUNCTION//////////////// -->
+<div class="container" >
+  <h1> (2) Exponential Function</h1>
+  <div class="input-group">
+      <label for="baseInput">Enter Base:</label>
+      <input type="number" id="baseInput" placeholder="Enter base">
+  </div>
+  <div class="input-group">
+      <label for="exponentInput">Enter Exponent:</label>
+      <input type="number" id="exponentInput" placeholder="Enter exponent">
+  </div>
+  <button id="calculateBtn1">Calculate</button>
+  <div class="result" id="res"></div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('calculateBtn1').addEventListener('click', () => {
+          const base = parseFloat(document.getElementById('baseInput').value);
+          const exponent = parseInt(document.getElementById('exponentInput').value);
+          if (!isNaN(base) && !isNaN(exponent)) {
+              const result = exponentialFunction(base, exponent);
+              document.getElementById('res').textContent = `Result: ${result}`;
+          } else {
+              alert("Please enter valid numbers for the base and exponent.");
+          }
+      });
+
+      function exponentialFunction(base, exponent) {
+          return Math.pow(base, exponent);
+      }
+  });
+</script>
+<!-- ///CONCATENATION FUNCTION////////-->
+<div class="container" >
+  <h1>(3) Concatenate Strings</h1>
+  <div class="input-group">
+      <label for="input1">Input 1:</label>
+      <input type="text" id="input1" placeholder="Enter first value">
+  </div>
+  <div class="input-group">
+      <label for="input2">Input 2:</label>
+      <input type="text" id="input2" placeholder="Enter second value">
+  </div>
+  <button id="concatBtn">Concatenate</button>
+  <div class="result">
+      <h2>Result:</h2>
+      <p id="result1"></p>
+  </div>
+</div>
+<script>
+  function concat(str1, str2) {
+      return str1 + str2;
+  }
+
+  function anotherConcatFunction(str1, str2) {
+      return `${str1} ${str2}`; // Adding a space between the strings
+  }
+
+  document.getElementById('concatBtn').addEventListener('click', () => {
+      const input1 = document.getElementById('input1').value;
+      const input2 = document.getElementById('input2').value;
+
+      // Example condition
+      const someCondition = true;
+
+      // Check some condition to decide which function to call
+      let result;
+      if (someCondition) {
+          result = concat(input1, input2);
+      } else {
+          result = anotherConcatFunction(input1, input2);
+      }
+      document.getElementById('result1').textContent = result;
+  });
+</script>
+
+    <!-- ////////////////MIN AND MAX IN AN ARRAY///////////// -->
+<div class="container" >
+  <h1>(4) Find Max and Min in Array</h1>
+  <div class="input-group">
+    <label for="arrayInputx">Enter Array Elements:</label>
+    <input type="text" id="arrayInputx" placeholder="Enter array elements separated by commas">
+  </div>
+  <button id="findMaxBtn">Find Max</button>
+  <button id="findMinBtn">Find Min</button>
+  <div class="result" id="resulting"></div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+document.getElementById('findMaxBtn').addEventListener('click', () => {
+  const arrayInput = document.getElementById('arrayInputx').value.split(',').map(item => parseFloat(item.trim()));
+  const maxElement = findMax(arrayInput);
+  document.getElementById('resulting').textContent = `Max element: ${maxElement}`;
+});
+
+document.getElementById('findMinBtn').addEventListener('click', () => {
+  const arrayInput = document.getElementById('arrayInputx').value.split(',').map(item => parseFloat(item.trim()));
+  const minElement = findMin(arrayInput);
+  document.getElementById('resulting').textContent = `Min element: ${minElement}`;
+});
+
+function findMax(arr) {
+  return Math.max(...arr);
+}
+
+function findMin(arr) {
+  return Math.min(...arr);
+}
+});
+</script>
+
+<!-- ///////////////BUBBLE SORTING FUNCTION//////////// -->
+<div class="container" >
+    <h1> (5) Bubble Sort Algorithm</h1>
+    <div class="input-group">
+        <label for="arrayInput">Enter Array Elements:</label>
+        <input type="text" id="arrayInput" placeholder="Enter array elements">
+    </div>
+    <button id="sortBtn">Sort</button>
+    <div class="result" id="sortedArray"></div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('sortBtn').addEventListener('click', () => {
+            const arrayInput = document.getElementById('arrayInput').value.trim().split(',').map(item => parseInt(item.trim()));
+            const sortedArray = bubbleSort(arrayInput);
+            document.getElementById('sortedArray').textContent = `Sorted Array: [${sortedArray.join(', ')}]`;
+        });
+
+        function bubbleSort(arr) {
+            const len = arr.length;
+            for (let i = 0; i < len - 1; i++) {
+                for (let j = 0; j < len - 1 - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        const temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+    });
+</script>
+<!-- /////////////////LINEAR EQUATION FUNCTION///////////// -->
+<div class="container">
+  <h1> (6) Linear Equation Solver</h1>
+  <div class="input-group">
+    <label for="coefficientA">Coefficient 'a':</label>
+    <input type="number" id="coefficientA" placeholder="Enter coefficient 'a'">
+  </div>
+  <div class="input-group">
+    <label for="coefficientB">Coefficient 'b':</label>
+    <input type="number" id="coefficientB" placeholder="Enter coefficient 'b'">
+  </div>
+  <button id="solveEquationBtn">Solve Equation</button>
+  <div class="result" id="result8"></div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('solveEquationBtn').addEventListener('click', () => {
+      const coefficientA = parseFloat(document.getElementById('coefficientA').value);
+      const coefficientB = parseFloat(document.getElementById('coefficientB').value);
+
+      if (isNaN(coefficientA) || isNaN(coefficientB)) {
+        document.getElementById('result8').textContent = "Please enter valid coefficients.";
+        return;
+      }
+
+      if (coefficientA === 0) {
+        document.getElementById('result8').textContent = "Coefficient 'a' cannot be zero.";
+        return;
+      }
+
+      const result = solveForX(coefficientA, coefficientB);
+      document.getElementById('result8').textContent = `Result: x = ${result}`;
+    });
+
+    function solveForX(a, b) {
+      return -b / a;
+    }
+  });
+</script>
+<!-- ////////////// STRING REVERSAL FUNCTION ////////// -->
+<div class="container" >
+  <h1> (7) String Reversal</h1>
+  <div class="input-group">
+    <label for="stringInput">Enter a String:</label>
+    <input type="text" id="stringInput" placeholder="Enter a string">
+  </div>
+  <button id="reverseBtn">Reverse</button>
+  <div class="result" id="reverseResult"></div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+document.getElementById('reverseBtn').addEventListener('click', () => {
+  const inputString = document.getElementById('stringInput').value.trim();
+  const reversedString = reverseString(inputString);
+  document.getElementById('reverseResult').textContent = reversedString;
+});
+
+function reverseString(str) {
+  return str.split('').reverse().join('');
+}
+});
+</script>
+<!-- /////// CONTAINS FUNCTION ////// -->
+<div class="container">
+  <h1> (8) Contains Function</h1>
+  <div class="input-group">
+    <label for="arrayInput1">Array:</label>
+    <input type="text" id="arrayInput1" placeholder="Enter array (e.g., 1, 2, 3)">
+  </div>
+  <div class="input-group">
+    <label for="elementInput">Element:</label>
+    <input type="text" id="elementInput" placeholder="Enter element to check">
+  </div>
+  <button id="checkBtn1">Check</button>
+  <div class="result">
+    <h2>Result:</h2>
+    <p id="result2"></p>
+  </div>
+</div>
+
+<script>
+document.getElementById('checkBtn1').addEventListener('click', () => {
+const arrayInput = document.getElementById('arrayInput1').value.split(',').map(item => parseInt(item.trim()));
+const elementInput = parseInt(document.getElementById('elementInput').value.trim());
+
+// Validate the inputs
+if (arrayInput.some(isNaN) || isNaN(elementInput)) {
+  document.getElementById('result2').textContent = "Please enter valid numbers.";
+  return;
+}
+
+const result = contains(arrayInput, elementInput);
+document.getElementById('result2').textContent = result ? "Element is present in the array" : "Element is not present in the array";
+});
+
+function contains(arr, element) {
+return arr.includes(element);
+}
+</script>
+
+<!-- //////EMAIL VALIDATION FUNCTION/////////// -->
+<div class="container">
+  <h1>Email Validation</h1>
+  <div class="input-group">
+    <label for="emailInput">Email:</label>
+    <input type="text" id="emailInput" placeholder="Enter email address">
+  </div>
+  <button id="validateBtn">Validate</button>
+  <div class="result">
+    <h2>Result:</h2>
+    <p id="result5" style="font-size:18px;"></p>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('validateBtn').addEventListener('click', () => {
+          const emailInput = document.getElementById('emailInput').value.trim();
+          const isValid = isValidEmail(emailInput);
+          const resultElement = document.getElementById('result5');
+          resultElement.textContent = isValid ? "Valid Email Address" : "Invalid Email Address";
+          resultElement.style.color = isValid ? "green" : "red";
+      });
+
+      function isValidEmail(email) {
+          const emailRegex = /^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          return emailRegex.test(email) && !email.includes(' ');
+      }
+  });
+</script>
+
+<!-- /////////////////CHECK OBJECT HAS PROPERTY OR NOT ///////////////// -->
+<div class="container" >
+  <h1>(10) Check Object Property</h1>
+  <div class="input-group">
+    <label for="objectInput">Enter Object (JSON format):</label>
+    <input type="text" id="objectInput" placeholder='e.g., {"name": "John", "age": 30}'>
+  </div>
+  <div class="input-group">
+    <label for="propertyInput">Enter Property to Check:</label>
+    <input type="text" id="propertyInput" placeholder="e.g., name">
+  </div>
+  <button id="checkPropertyBtn">Check Property</button>
+  <div class="result" id="resul"></div>
+</div>
+<script>
+//{"name": "Alice", "age": 25, "city": "New York"}
+  //city
+
+  document.addEventListener('DOMContentLoaded', function() {
+document.getElementById('checkPropertyBtn').addEventListener('click', () => {
+  const objectInput = document.getElementById('objectInput').value.trim();
+  const propertyInput = document.getElementById('propertyInput').value.trim();
+  
+  if (objectInput && propertyInput) {
+    try {
+      const obj = JSON.parse(objectInput);
+      const result = hasProperty(obj, propertyInput);
+      document.getElementById('resul').textContent = result ? `Property "${propertyInput}" exists in the object.` : `Property "${propertyInput}" does not exist in the object.`;
+    } catch (e) {
+      document.getElementById('resul').textContent = 'Invalid JSON input. Please enter a valid JSON object.';
+    }
+  } else {
+    document.getElementById('resul').textContent = 'Please enter both the object and the property to check.';
+  }
+});
+
+function hasProperty(obj, prop) {
+  return obj.hasOwnProperty(prop);
+}
+});
+</script>
+<!-- //////////////FACTORIAL FUNCTION /////////// -->
+<div class="container" >
+  <h1> (11) Factorial Calculator</h1>
+  <div class="input-group">
+    <label for="numberInput1">Enter a Number:</label>
+    <input type="number" id="numberInput1" placeholder="Enter a number">
+  </div>
+  <button id="calculateBtn">Calculate Factorial</button>
+  <div class="result" id="factorialResult"></div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+document.getElementById('calculateBtn').addEventListener('click', () => {
+  const number = parseInt(document.getElementById('numberInput1').value.trim());
+  const result = factorial(number);
+  document.getElementById('factorialResult').textContent = `Factorial of ${number} is: ${result}`;
+});
+
+function factorial(n) {
+  if (n === 0) {
+    return 1;
+  } else  {
+    return n * factorial(n - 1);
+  }
+  
+}
+});
+</script>
+<!-- ////////////////////CAPITALIZE IST LETTER OF EACH WORD//////////////////// -->
+<div class="container" >
+  <h1>(12) Capitalize First Letter of Each Word</h1>
+  <div class="input-group">
+    <label for="sentenceInput">Enter Sentence:</label>
+    <input type="text" id="sentenceInput" placeholder="Enter a sentence">
+  </div>
+  <button id="capitalizeBtn">Capitalize</button>
+  <div class="result" id="result10"></div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+document.getElementById('capitalizeBtn').addEventListener('click', () => {
+  const sentence = document.getElementById('sentenceInput').value;
+  const capitalizedSentence = capitalizeFirstLetter(sentence);
+  document.getElementById('result10').textContent = `Capitalized Sentence: ${capitalizedSentence}`;
+});
+
+function capitalizeFirstLetter(sentence) {
+  return sentence.replace(/\b\w/g, (char) => char.toUpperCase());
+}
+});
+</script>
+<!-- ////////////////FUNCTION REMOVES ARRAY DUPLICATION /////////// -->
+<div class="container">
+  <h1>(13) Remove Duplicates from Array</h1>
+  <div class="input-group">
+    <label for="arrayInput4">Enter Array Elements:</label>
+    <input type="text" id="arrayInput4" placeholder="Enter array elements separated by commas">
+  </div>
+  <button id="removeDuplicatesBtn">Remove Duplicates</button>
+  <div class="result" id="result7"></div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+document.getElementById('removeDuplicatesBtn').addEventListener('click', () => {
+  const arrayInput = document.getElementById('arrayInput4').value.trim();
+  if (arrayInput === '') {
+    document.getElementById('result7').textContent = "Please enter some values.";
+    return;
+  }
+  const inputArray = arrayInput.split(',').map(item => item.trim());
+  console.log("Input array:", inputArray); // Debugging
+  const uniqueArray = removeDuplicates(inputArray);
+  console.log("Unique array:", uniqueArray); // Debugging
+  document.getElementById('result7').textContent = `Array without duplicates: [${uniqueArray.join(', ')}]`;
+});
+
+function removeDuplicates(arr) {
+  return [...new Set(arr)];
+}
+});
+
+</script>
+
+<!-- /////////////////ADDING NUMBER IN A STACK////////////// -->
+<div class="container" >
+  <h1>(14) Stack Insertion</h1>
+  <div class="input-group">
+      <label for="numberInputs">Enter Number:</label>
+      <input type="number" id="numberInputs" placeholder="Enter a number">
+  </div>
+  <button id="insertBtn">Insert into Stack</button>
+  <div class="result">
+      <h2>Stack Contents:</h2>
+      <p id="stackContents"></p>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const stack = [];
+
+      document.getElementById('insertBtn').addEventListener('click', () => {
+          const numberInput = document.getElementById('numberInputs').value.trim();
+          if (numberInput !== '') {
+              const number = parseInt(numberInput);
+              insertIntoStack(number);
+              displayStack();
+          } else {
+              alert("Please enter a number.");
+          }
+      });
+
+      function insertIntoStack(number) {
+          stack.push(number);
+      }
+
+      function displayStack() {
+          document.getElementById('stackContents').textContent = `Stack: [${stack.join(', ')}]`;
+      }
+  });
+</script>
+<!-- ///////////PPHONE NUMBER VALIDATION FUNCTION//////////// -->
+<div class="container" >
+  <h1> (15) Phone Number Validation</h1>
+  <div class="input-group">
+      <label for="phoneNumberInput">Enter Phone Number:</label>
+      <input type="text" id="phoneNumberInput" placeholder="Enter phone number">
+      <button class="btn" onclick="verifyPhoneNumber()">Verify</button>
+  </div>
+  <div class="result" id="verificationResult"></div>
+  
+  <script>
+      // Validation function to check if a given string is a valid phone number
+      function isValidPhoneNumber(phoneNumber) {
+          // Regular expression for validating phone number (accepts only digits and optional dashes)
+          const phoneRegex = /^\d{3}-?\d{3}-?\d{4}$/;
+          return phoneRegex.test(phoneNumber);
+      }
+  
+      // Function to verify the entered phone number
+      function verifyPhoneNumber() {
+          const phoneNumberInput = document.getElementById('phoneNumberInput');
+          const phoneNumber = phoneNumberInput.value.trim();
+          const verificationResult = document.getElementById('verificationResult');
+  
+          if (phoneNumber === '') {
+              verificationResult.textContent = 'Please enter a phone number.';
+              verificationResult.classList.add('error');
+              return;
+          }
+  
+          if (isValidPhoneNumber(phoneNumber)) {
+              verificationResult.textContent = 'Valid phone number!';
+              verificationResult.classList.remove('error');
+          } else {
+              verificationResult.textContent = 'Invalid phone number. Please enter a valid phone number.';
+              verificationResult.classList.add('error');
+          }
+      }
+  </script>
+  </div>
+
+  <!-- /////CHECK NUMBER IS PRIME OR NOT/////////// -->
+<div class="container" >
+  <h1> (16) Prime Number Checker</h1>
+  <div class="input-group">
+    <label for="numberInput">Enter a Number:</label>
+    <input type="number" id="numberInput" placeholder="Enter a number">
+  </div>
+  <button id="checkBtn1">Check</button>
+  <div class="result" id="primeResult"></div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+document.getElementById('checkBtn1').addEventListener('click', () => {
+  const number = parseInt(document.getElementById('numberInput').value.trim());
+  const isPrimeNumber = isPrime(number);
+  const resultElement = document.getElementById('primeResult');
+  resultElement.textContent = isPrimeNumber ? "Prime Number" : "Not a Prime Number";
+  resultElement.style.color = isPrimeNumber ? "green" : "red";
+});
+
+function isPrime(num) {
+  if (num <= 1) return false;
+  for (let i = 2; i < num; i++) {
+    if (num % i === 0) return false;
+  }
+  return true;
+}
+});
+
+</script>
+<!-- 
+//////CHECK USER AUTHENTICATION ///// -->
+<div class="container" >
+    <h1> (17) User Authentication</h1>
+    <div class="input-group">
+      <label for="usernameInput">Username:</label>
+      <input type="text" id="usernameInput" placeholder="Enter your username">
+    </div>
+    <div class="input-group">
+      <label for="passwordInput">Password:</label>
+      <input type="password" id="passwordInput" placeholder="Enter your password">
+    </div>
+    <button id="loginBtn">Login</button>
+    <div class="result" id="loginResult"></div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('loginBtn').addEventListener('click', () => {
+    const username = document.getElementById('usernameInput').value.trim();
+    const password = document.getElementById('passwordInput').value.trim();
+    const isLoggedIn = authenticateUser(username, password, users);
+    const resultElement = document.getElementById('loginResult');
+    resultElement.textContent = isLoggedIn ? "Login Successful" : "Invalid Username or Password";
+    resultElement.style.color = isLoggedIn ? "green" : "red";
+  });
+
+  const users = [
+    { username: "Areej", password: "12345" },
+    { username: "quality-testing", password: "54321" }
+  ];
+
+  function authenticateUser(username, password, users) {
+    const user = users.find(u => u.username === username);
+    if (user && user.password === password) {
+      return true;
+    }
+    return false;
+  }
+});
+</script>
+
+<!-- ///////////TEMPERATURE CONVERSION FUNCTION /////////// -->
+<div class="container">
+    <h1>(18) Celsius to Fahrenheit Converter</h1>
+    <div class="input-group">
+      <label for="celsiusInput">Temperature in Celsius:</label>
+      <input type="number" id="celsiusInput" placeholder="Enter temperature in Celsius">
+    </div>
+    <button id="convertBtn">Convert to Fahrenheit</button>
+    <div class="result" id="result9"></div>
+  </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('convertBtn').addEventListener('click', () => {
+    const celsius = parseFloat(document.getElementById('celsiusInput').value);
+
+    if (isNaN(celsius)) {
+      document.getElementById('result9').textContent = "Please enter a valid temperature in Celsius.";
+      return;
+    }
+
+    const fahrenheit = convertToFarhenheit(celsius);
+    document.getElementById('result9').textContent = `Temperature in Fahrenheit: ${fahrenheit.toFixed(2)}`;
+  });
+
+  function convertToFarhenheit(celsius) {
+    return (celsius * 9/5) + 32;
+  }
+});
+</script>
+
+<!-- ///////////////REMOVING WHITE SPACES FROM ARRAY////////// -->
+<div class="container" >
+    <h1> (19) Remove White Spaces from a String</h1>
+    <div class="input-group">
+      <label for="stringInput">Enter String:</label>
+      <input type="text" id="stringInputs" placeholder="Enter a string with spaces">
+    </div>
+    <button id="removeSpacesBtn">Remove Spaces</button>
+    <div class="result" id="results"></div>
+  </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('removeSpacesBtn').addEventListener('click', () => {
+    const inputString = document.getElementById('stringInputs').value;
+    const stringWithoutSpaces = removeSpaces(inputString);
+    document.getElementById('results').textContent = `String without spaces: ${stringWithoutSpaces}`;
+  });
+
+  function removeSpaces(str) {
+    return str.replace(/\s+/g, '');
+  }
+});
+</script>
+
+<!-- ////////////////COUNT OCCURANCES OF ELEMENTS IN ARRAY///////////// -->
+<div class="container" >
+    <h1>(20) Count Occurrences of Each Element</h1>
+    <div class="input-group">
+      <label for="arrayInpute">Enter Array Elements:</label>
+      <input type="text" id="arrayInpute" placeholder="Enter array elements separated by commas">
+    </div>
+    <button id="countOccurrencesBtn">Count Occurrences</button>
+    <div class="result" id="resulted"></div>
+  </div>
+  <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('countOccurrencesBtn').addEventListener('click', () => {
+    const arrayInput = document.getElementById('arrayInpute').value.split(',').map(item => item.trim());
+    const occurrences = countOccurrences(arrayInput);
+    document.getElementById('resulted').textContent = formatOccurrences(occurrences);
+  });
+
+  function countOccurrences(arr) {
+    return arr.reduce((acc, val) => {
+      acc[val] = (acc[val] || 0) + 1;
+      return acc;
+    }, {});
+  }
+
+  function formatOccurrences(occurrences) {
+    let result = 'Occurrences:\n';
+    for (const [key, value] of Object.entries(occurrences)) {
+      result += `${key}: ${value}\n`;
+    }
+    return result;
+  }
+});
+</script>
+</div>
+</div>
+  </div>
+</div>
+  <script src="spec/calculator.spec.js"></script>
+  <script src="src/Calculator.js"></script>
+  
+</body>
+
+</html>
